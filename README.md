@@ -12,13 +12,17 @@ A recent version of Ubuntu.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    android_sdk_download_location: http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz
+    android_sdk_download_location: https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 
-The location to the Android SDK tools package to be installed.
+The location to the Android SDK tools package to be downloaded.
 
     android_sdk_install_location: /opt
+    
+The location to the Android SDK tools package to be installed.
 
-The location on disk where you'd like to SDK to be installed.
+    android_sdk_install_catalog: android-sdk-linux
+
+The name of catalog  on disk where you'd like to SDK to be installed.
 
     ubuntu_dependency_packages:
       - "libncurses5"
@@ -48,10 +52,6 @@ A list of aptitude installable build dependencies for Ubuntu Precise.
 
     rh_dependency_packages:
       - expect
-      - libstdc++.i686
-      - mesa-libGL-devel
-      - ncurses-libs.i686
-      - zlib.i686
 
 A list of yum installable build dependencies for RedHat based OS.
 
@@ -59,25 +59,18 @@ A list of yum installable build dependencies for RedHat based OS.
 
 Whether or not the role should update the PATH in /etc/environment with the relevant android SDK locations
 
-    android_sdk_base_buildtools_version: 20.0.0
+    android_sdk_base_buildtools_version: 28.0.3
 
 The main build tools version from the SDK to use, mainly useful for PATH updates.
 
     android_sdk_tools_to_install:
-      - build-tools-20.0.0
-      - build-tools-19.1.0
+      - build-tools;28.0.3
       - platform-tools
-      - tools
-      - extra-android-support
-      - extra-google-m2repository
-      - extra-android-m2repository
+      - extras;android;m2repository
+      - extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2
     android_sdks_to_install:
-      - android-21
-      - android-20
-      - android-19
-      - android-18
-      - android-17
-      - android-16
+      - platforms;android-28
+
 
 The actual Android SDK packages to install using the SDK manager.
 
@@ -106,3 +99,4 @@ This role was created in 2015 by [Nick Pack](https://github.com/nickpack).
 * @edunham - Fixed 32bit support
 * @peterjanes - Added RedHat family support
 * @conorsch - Changed conditionals to allow > 14.04 support
+* @mateuszmroz93 -  Fixed problem with installation newest version SDK (28.0.0) for CentOS
